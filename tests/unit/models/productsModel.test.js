@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { before } = require('mocha');
+const { before, after } = require('mocha');
 const sinon = require('sinon');
 
 const productsModel = require('../../../models/productsModel');
@@ -7,7 +7,7 @@ const connection = require('../../../models/connection');
 
 // TESTS FOR GETALL FUNCTION
 
-describe('Get all products from StoreManager.products with getAll', () => {
+describe('Model get all products from StoreManager.products with getAll', () => {
 
   describe('when there are no products', () => {
 
@@ -66,7 +66,7 @@ describe('Get all products from StoreManager.products with getAll', () => {
 
 // TESTS FOR GETBYID FUNCTION
 
-describe('Get only one product from StoreManager.products with get by id', () => {
+describe('Modelet only one product from StoreManager.products with get by id', () => {
 
   describe('when there is no product with the informed id', () => {
 
