@@ -22,8 +22,16 @@ const add = async (req, res) => {
   return res.status(201).json(saleAdded);
 };
 
+const remove = async (req, res) => {
+  const { id } = req.params;
+  const removedSale = await salesService.remove(id);
+  if (removedSale === null) throw new ApplicationError(404, 'Sale not found');
+  return res.status(204).json();
+};
+
 module.exports = {
   getAll,
   getById,
   add,
+  remove,
 };
