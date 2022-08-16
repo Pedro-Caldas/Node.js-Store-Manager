@@ -1,6 +1,12 @@
 const productsService = require('../services/productsService');
 const ApplicationError = require('../errors/ApplicationError');
 
+const search = async (req, res) => {
+  const { q } = req.query;
+  const productsArr = await productsService.search(q);
+  return res.status(200).json(productsArr);
+};
+
 const getAll = async (_req, res) => {
   const products = await productsService.getAll();
   return res.status(200).json(products);
@@ -40,4 +46,5 @@ module.exports = {
   create,
   update,
   remove,
+  search,
 };

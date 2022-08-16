@@ -32,10 +32,18 @@ const remove = async (id) => {
   return { id };
 };
 
+const search = async (q) => {
+  const [result] = await connection.execute('SELECT * FROM StoreManager.products;');
+  const filteredProducts = result.filter((el) => el.name.includes(q));
+  if (filteredProducts.length === 0) return result;
+  return filteredProducts;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
   remove,
+  search,
 };
