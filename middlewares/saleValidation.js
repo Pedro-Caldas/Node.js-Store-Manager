@@ -6,7 +6,6 @@ const isSaleValid = (sale) => {
 };
 
 const saleMiddleware = (req, res, next) => {
-  console.log(req.body);
   const sale = req.body;
   const { error } = isSaleValid(sale);
   console.log(error);
