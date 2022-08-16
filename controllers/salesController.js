@@ -13,14 +13,17 @@ const getById = async (req, res) => {
   return res.status(200).json(sale);
 };
 
-// const create = async (req, res) => {
-//   const { name } = req.body;
-//   const newProduct = await productsService.create(name);
-//   return res.status(201).json(newProduct);
-// };
+const add = async (req, res) => {
+  const sale = req.body;
+  const productsId = sale.map((el) => el.productId);
+  await salesService.verifyProducts(productsId);
+  const saleId = await salesService.addSale(sale);
+  const saleAdded = await salesService.getNewSale(saleId);
+  return res.status(201).json(saleAdded);
+};
 
 module.exports = {
   getAll,
   getById,
-  // create,
+  add,
 };

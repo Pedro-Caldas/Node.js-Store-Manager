@@ -29,14 +29,14 @@ const getById = async (id) => {
   return result;
 };
 
-// const create = async (name) => {
-//   const [result] = await connection
-//     .execute('INSERT INTO StoreManager.products (name) VALUES (?);', [name]);
-//   return { id: result.insertId, name };
-// };
+const addSale = async () => {
+  const [result] = await connection
+    .execute('INSERT INTO StoreManager.sales () VALUES ();');
+  return { id: result.insertId };
+};
 
 module.exports = {
   getAll,
   getById,
-  // create,
+  addSale,
 };
