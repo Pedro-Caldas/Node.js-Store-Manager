@@ -22,6 +22,17 @@ const add = async (req, res) => {
   return res.status(201).json(saleAdded);
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const sale = req.body;
+  const productsId = sale.map((el) => el.productId);
+  await salesService.verifyProducts(productsId);
+  const updatedSale = await salesService.update(id, sale);
+  if (updatedSale === null) throw new ApplicationError(404, 'Sale not found');
+  const responseJson = { saleId: id, itemsUpdated: sale };
+  return res.status(200).json(responseJson);
+};
+
 const remove = async (req, res) => {
   const { id } = req.params;
   const removedSale = await salesService.remove(id);
@@ -33,5 +44,6 @@ module.exports = {
   getAll,
   getById,
   add,
+  update,
   remove,
 };

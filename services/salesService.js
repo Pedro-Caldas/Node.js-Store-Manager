@@ -30,6 +30,8 @@ const getNewSale = async (id) => {
   return saleObject;
 };
 
+const update = async (id, sale) => salesProductsModel.update(id, sale);
+
 const remove = async (id) => salesModel.remove(id);
 
 module.exports = {
@@ -38,5 +40,6 @@ module.exports = {
   addSale,
   verifyProducts,
   getNewSale,
+  update,
   remove,
 };
