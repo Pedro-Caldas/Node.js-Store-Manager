@@ -21,10 +21,15 @@ const create = async (name) => {
 const update = async (id, name) => {
   const [updatedProduct] = await connection
     .execute('UPDATE StoreManager.products SET name = ? WHERE id = ?;', [name, id]);
-  console.log(updatedProduct);
   if (updatedProduct.affectedRows === 0) return null;
-  console.log(updatedProduct.affectedRows.length);
   return { id, name };
+};
+
+const remove = async (id) => {
+  const [removedProduct] = await connection
+    .execute('DELETE FROM StoreManager.products WHERE id = ?;', [id]);
+  if (removedProduct.affectedRows === 0) return null;
+  return { id };
 };
 
 module.exports = {
@@ -32,4 +37,5 @@ module.exports = {
   getById,
   create,
   update,
+  remove,
 };

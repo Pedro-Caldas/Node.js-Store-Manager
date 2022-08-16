@@ -8,9 +8,12 @@ const create = async (name) => productsModel.create(name);
 
 const update = async (id, name) => productsModel.update(id, name);
 
+const remove = async (id) => productsModel.remove(id);
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  remove,
 };
