@@ -66,7 +66,7 @@ describe('Model get all products from StoreManager.products with getAll', () => 
 
 // TESTS FOR GETBYID FUNCTION
 
-describe('Modelet only one product from StoreManager.products with get by id', () => {
+describe('Model get only one product from StoreManager.products with get by id', () => {
 
   describe('when there is no product with the informed id', () => {
 

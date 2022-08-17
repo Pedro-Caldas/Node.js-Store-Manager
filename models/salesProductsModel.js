@@ -23,12 +23,10 @@ const getSalesProducts = async ({ id }) => {
 const update = async (id, sale) => {
   const [result] = await connection
     .execute('SELECT * FROM StoreManager.sales WHERE id = ?', [id]);
-  console.log(result.length);
   if (result.length === 0) return null;
 
   let queries = '';
   const sales = sale.map((el) => [el.productId, el.quantity, Number(id), el.productId]);
-  console.log(sales);
   sales.forEach((el) => {
     queries += mysql.format(`UPDATE StoreManager.sales_products
     SET product_id = ?, quantity = ?
