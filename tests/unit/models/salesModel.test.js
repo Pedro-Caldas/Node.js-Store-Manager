@@ -123,3 +123,58 @@ describe('Model get only one sale from StoreManager.sales with get by id', () =>
   });
 
 });
+
+// TESTS FOR REMOVE FUNCTION
+
+describe('Model delete sale from StoreManager.sales with id', () => {
+
+  describe('when there is no sale with the informed id', () => {
+
+    before(async () => {
+      const execute = [[]];
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+    after(async () => {
+      connection.execute.restore();
+    });
+
+    // it('returns null', async () => {
+    //   const { result } = await salesModel.remove(5);
+    //   expect(result).to.be.equal(null);
+    // });
+
+  });
+
+  describe('when there is a sale with the informed id', () => {
+
+    before(async () => {
+      const execute = [[{
+        "saleId": 1,
+        "date": "2021-09-09T04:54:29.000Z",
+        "productId": 1,
+        "quantity": 2
+      }]];
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+    after(async () => {
+      connection.execute.restore();
+    });
+
+    it('returns an object', async () => {
+      const result = await salesModel.remove(1);
+      expect(result).to.be.an('object');
+    });
+
+    it('the returned object is not empty', async () => {
+      const result = await salesModel.remove(1);
+      expect(result).not.to.be.empty;
+    });
+
+    it('the object has saleId, date, productId and quantity as props', async () => {
+      const result = await salesModel.remove(1);
+      expect(result).to.include.all.keys('id');
+    });
+
+  });
+
+});

@@ -7,7 +7,6 @@ const sinon = require('sinon');
 
 const productsService = require('../../../services/productsService');
 const productsController = require('../../../controllers/productsController');
-const ApplicationError = require('../../../errors/ApplicationError');
 
 // TESTS FOR GETALL FUNCTION
 
@@ -66,7 +65,7 @@ describe('Controller get all products from StoreManager.products with getAll', (
 
 // TESTS FOR GETBYID FUNCTION
 
-describe('Service get only one product from StoreManager.products with get by id', () => {
+describe('Controller get only one product from StoreManager.products with get by id', () => {
 
   describe('when there is no product with the informed id', () => {
 
@@ -111,3 +110,62 @@ describe('Service get only one product from StoreManager.products with get by id
 
 });
 
+// TESTS FOR UPDATE FUNCTION
+
+describe('Controller update product from StoreManager.product with id', () => {
+
+  describe('when there is a product with the informed id', () => {
+
+    const res = {};
+    const req = {};
+    before(() => {
+      req.params = { id: 1 }
+      req.body = { name: "Martelo do Batman" }
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon.stub(productsService, 'update').resolves([{
+        "id": 1,
+        "name": "Martelo do Batman"
+      }]);
+    });
+    after(() => {
+      productsService.update.restore();
+    });
+
+    it('calls json method with data', async () => {
+      await productsController.update(req, res);
+      expect(res.json.calledWith([{
+        "id": 1,
+        "name": "Martelo do Batman"
+      }])).to.be.equal(true);
+    });
+
+  });
+
+});
+
+// TESTS FOR REMOVE FUNCTION
+
+describe('Controller delete product from StoreManager.product with id', () => {
+
+  describe('when there is no product with the informed id', () => {
+
+    const res = {};
+    const req = {};
+    before(() => {
+      req.params = { id: 5 }
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon.stub(productsService, 'remove').resolves(null);
+    })
+    after(() => {
+      productsService.remove.restore();
+    });
+
+    it('throws an application error', async () => {
+      return expect(productsController.remove(req, res)).to.eventually.be.rejectedWith('Product not found');
+    });
+
+  });
+
+});

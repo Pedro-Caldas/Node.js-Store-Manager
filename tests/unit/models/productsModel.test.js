@@ -113,3 +113,53 @@ describe('Model get only one product from StoreManager.products with get by id',
   });
 
 });
+
+// TESTS FOR REMOVE FUNCTION
+
+describe('Model delete product from StoreManager.products with id', () => {
+
+  describe('when there is no product with the informed id', () => {
+
+    before(async () => {
+      const execute = [[]];
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+    after(async () => {
+      connection.execute.restore();
+    });
+
+    // it('returns null', async () => {
+    //   const { result } = await productsModel.remove(5);
+    //   expect(result).to.be.equal(null);
+    // });
+
+  });
+
+  describe('when there is a product with the informed id', () => {
+
+    before(async () => {
+      const execute = [[{ "id": 1, "name": "Martelo de Thor" }]];
+      sinon.stub(connection, 'execute').resolves(execute);
+    })
+    after(async () => {
+      connection.execute.restore();
+    });
+
+    it('returns an object', async () => {
+      const result = await productsModel.remove(1);
+      expect(result).to.be.an('object');
+    });
+
+    it('the returned object is not empty', async () => {
+      const result = await productsModel.remove(1);
+      expect(result).not.to.be.empty;
+    });
+
+    it('the returned object has the correct prop id', async () => {
+      const result = await productsModel.getById(1);
+      expect(result).to.include.all.keys('id');
+    });
+
+  });
+
+});
