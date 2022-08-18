@@ -4,7 +4,9 @@ const sinon = require('sinon');
 
 const salesService = require('../../../services/salesService');
 const salesModel = require('../../../models/salesModel');
+const salesProductsModel = require('../../../models/salesProductsModel');
 const connection = require('../../../models/connection');
+const { execute } = require('../../../models/connection');
 
 // TESTS FOR GETALL FUNCTION
 
@@ -174,6 +176,29 @@ describe('Service delete sale from StoreManager.sales with id', () => {
     it('the object has id as prop', async () => {
       const result = await salesModel.remove(1);
       expect(result).to.include.all.keys('id');
+    });
+
+  });
+
+});
+
+// TESTS FOR UPDATE FUNCTION
+
+describe('Service update sale from StoreManager.sales with id', () => {
+
+  describe('when there is no sale with the informed id', () => {
+
+    before(async () => {
+      const response = null;
+      sinon.stub(salesProductsModel, 'update').resolves(response);
+    })
+    after(async () => {
+      salesProductsModel.update.restore();
+    });
+
+    it('returns null', async () => {
+      const result = await salesService.update(5);
+      expect(result).to.be.equal(null);
     });
 
   });

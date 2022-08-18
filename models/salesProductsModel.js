@@ -34,6 +34,7 @@ const update = async (id, sale) => {
   });
   await connection.query(queries);
 
+  console.log(sale);
   return sale;
 };
 

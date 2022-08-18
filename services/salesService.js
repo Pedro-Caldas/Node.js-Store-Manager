@@ -3,9 +3,17 @@ const productsModel = require('../models/productsModel');
 const salesProductsModel = require('../models/salesProductsModel');
 const ApplicationError = require('../errors/ApplicationError');
 
-const getAll = async () => (salesModel.getAll());
+// const getAll = async () => (salesModel.getAll());
+async function getAll() {
+  const result = await salesModel.getAll();
+  return result;
+}
 
-const getById = async (id) => (salesModel.getById(id));
+// const getById = async (id) => (salesModel.getById(id));
+async function getById(id) {
+  const result = await salesModel.getById(id);
+  return result;
+}
 
 const verifyProducts = async (productsId) => {
   const products = await productsModel.getAll();
@@ -30,9 +38,17 @@ const getNewSale = async (id) => {
   return saleObject;
 };
 
-const update = async (id, sale) => salesProductsModel.update(id, sale);
+// const update = async (id, sale) => salesProductsModel.update(id, sale);
+async function update(id, sale) {
+  const result = await salesProductsModel.update(id, sale);
+  return result;
+}
 
-const remove = async (id) => salesModel.remove(id);
+// const remove = async (id) => salesModel.remove(id);
+async function remove(id) {
+  const result = await salesModel.remove(id);
+  return result;
+}
 
 module.exports = {
   getAll,
