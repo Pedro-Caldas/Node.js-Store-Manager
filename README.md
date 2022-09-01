@@ -19,7 +19,7 @@ After cloning the repository, you need to install the necessary dependencies wit
 
 
 <details>
-  <summary>Routes for <i>Products</i></summary>
+  <summary>Endpoints for <i>Products</i></summary>
   <br>
   <ul>
   <li>get('/');</li>
@@ -32,7 +32,7 @@ After cloning the repository, you need to install the necessary dependencies wit
 </details>
 
 <details>
-  <summary>Routes for <i>Sales</i></summary>
+  <summary>Endpoints for <i>Sales</i></summary>
   <br>
   <ul>
   <li>get('/');</li>
