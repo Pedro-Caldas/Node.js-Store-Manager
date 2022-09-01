@@ -15,7 +15,7 @@ MySQL
 Mocha, Chai and Sinon
 
 ## Instructions to utilize the application
-After cloning the repository, you need to install the necessary dependencies with the `npm install` command and start the project with the `node index.js` command. After that, you can make requests using an HTTP client (Insomnia, Postman, HTTPie, etc.).
+After cloning the repository, you need to install the necessary dependencies with the `npm install` command and start the project with the `node index.js` command. After that, you can make requests using an **HTTP client** (Insomnia, Postman, HTTPie, etc.).
 
 ## Commit history
 You can check the entire commit history to see how the project developed step by step. All commits were based on the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) guide, keeping an organization and accurate description of what was done with each change.
